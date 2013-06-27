@@ -78,7 +78,7 @@
         <tr>
             <td align="left">
                 <h1>
-                    <fmt:message key="jsp.mydspace"/>: <%= user.getFullName() %>
+                    <fmt:message key="jsp.mydspace"/>: <%= Utils.addEntities(user.getFullName()) %>
                 </h1>
             </td>
             <td align="right" class="standard">
@@ -136,7 +136,7 @@
                 </td>
                 <td headers="t2" class="<%= row %>RowEvenCol"><%= Utils.addEntities(title) %></td>
                 <td headers="t3" class="<%= row %>RowOddCol"><%= owned[i].getCollection().getMetadata("name") %></td>
-                <td headers="t4" class="<%= row %>RowEvenCol"><a href="mailto:<%= submitter.getEmail() %>"><%= submitter.getFullName() %></a></td>
+                <td headers="t4" class="<%= row %>RowEvenCol"><a href="mailto:<%= submitter.getEmail() %>"><%= Utils.addEntities(submitter.getFullName()) %></a></td>
                 <!-- <td headers="t5" class="<%= row %>RowOddCol"></td> -->
                 <td headers="t5" class="<%= row %>RowEvenCol">
                      <form action="<%= request.getContextPath() %>/mydspace" method="post">
@@ -200,7 +200,7 @@
                     </td>
                     <td headers="t7" class="<%= row %>RowEvenCol"><%= Utils.addEntities(title) %></td>
                     <td headers="t8" class="<%= row %>RowOddCol"><%= pooled[i].getCollection().getMetadata("name") %></td>
-                    <td headers="t9" class="<%= row %>RowEvenCol"><a href="mailto:<%= submitter.getEmail() %>"><%= submitter.getFullName() %></a></td>
+                    <td headers="t9" class="<%= row %>RowEvenCol"><a href="mailto:<%= submitter.getEmail() %>"><%= Utils.addEntities(submitter.getFullName()) %></a></td>
                     <td class="<%= row %>RowOddCol">
                         <form action="<%= request.getContextPath() %>/mydspace" method="post">
                             <input type="hidden" name="step" value="<%= MyDSpaceServlet.MAIN_PAGE %>" />
@@ -285,7 +285,7 @@
                 </form>
             </td>
             <td headers="t10" class="<%= row %>RowEvenCol">
-                <a href="mailto:<%= submitter.getEmail() %>"><%= submitter.getFullName() %></a>
+                <a href="mailto:<%= submitter.getEmail() %>"><%= Utils.addEntities(submitter.getFullName()) %></a>
             </td>
             <td headers="t11" class="<%= row %>RowOddCol"><%= Utils.addEntities(title) %></td>
             <td headers="t12" class="<%= row %>RowEvenCol"><%= workspaceItems[i].getCollection().getMetadata("name") %></td>
@@ -332,7 +332,7 @@
                 </form>
             </td>
             <td class="<%= row %>RowEvenCol">
-                <a href="mailto:<%= submitter.getEmail() %>"><%= submitter.getFullName() %></a>
+                <a href="mailto:<%= submitter.getEmail() %>"><%= Utils.addEntities(submitter.getFullName()) %></a>
             </td>
             <td class="<%= row %>RowOddCol"><%= Utils.addEntities(title) %></td>
             <td class="<%= row %>RowEvenCol"><%= supervisedItems[i].getCollection().getMetadata("name") %></td>
