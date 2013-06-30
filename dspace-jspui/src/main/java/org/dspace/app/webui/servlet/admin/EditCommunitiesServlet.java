@@ -78,7 +78,7 @@ public class EditCommunitiesServlet extends DSpaceServlet
 
     /** User wants to delete a collection */
     public static final int CONFIRM_DELETE_COLLECTION = 10;
-
+    
     /** Logger */
     private static Logger log = Logger.getLogger(EditCommunitiesServlet.class);
 
@@ -136,6 +136,37 @@ public class EditCommunitiesServlet extends DSpaceServlet
         if (request.getParameter("submit_cancel") != null)
         {
             showControls(context, request, response);
+
+            return;
+        }
+        else if (request.getParameter("submit_add_collection") != null)
+        {
+        	Collection collectionToAdd = Collection.find(context, UIUtil
+                    .getIntParameter(request, "add_collection_id"));
+        	community.addCollection(collectionToAdd);
+        	
+        	// Show community edit page
+            String jsp = "/tools/edit-community.jsp";
+            JSPManager.showJSP(request, response, jsp);
+            
+            context.complete();
+
+            return;
+        }
+        else if (request.getParameter("submit_remove_collection") != null)
+        {
+        	Collection collectionToRemove = Collection.find(context, UIUtil
+                    .getIntParameter(request, "remove_collection_id"));
+        	int parentCommunitiesLength = collectionToRemove.getParentCommunities().length;
+        	if (parentCommunitiesLength > 1) {
+        		community.removeCollection(collectionToRemove);
+        	}
+        	
+        	// Show community edit page
+            String jsp = "/tools/edit-community.jsp";
+            JSPManager.showJSP(request, response, jsp);
+            
+            context.complete();
 
             return;
         }
@@ -259,7 +290,7 @@ public class EditCommunitiesServlet extends DSpaceServlet
             context.complete();
 
             break;
-
+            
         default:
 
             // Erm... weird action value received.
@@ -982,5 +1013,5 @@ public class EditCommunitiesServlet extends DSpaceServlet
             log.warn("Upload exceeded upload.max");
             JSPManager.showFileSizeLimitExceededError(request, response, ex.getMessage(), ex.getActualSize(), ex.getPermittedSize());
         }
-    }
+    } 
 }

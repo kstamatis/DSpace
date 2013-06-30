@@ -662,6 +662,65 @@ public class Community extends DSpaceObject
     }
 
     /**
+     * Get the collections that can be added as childs to this community. That is, from all collections that exist,
+     * remove those that are already childs of this community and return the others.
+     * 
+     * @return array of Collection objects
+     */
+    public Collection[] getPossibleAddCollections() throws SQLException
+    {
+        List<Collection> collections = new ArrayList<Collection>();
+
+        Collection[] allCollections = Collection.findAll(ourContext);
+        Collection[] childCollections = this.getCollections();
+        
+        for (Collection collection : allCollections){
+        	boolean found = false;
+        	for (Collection childCollection : childCollections){
+        		if (collection.getID() == childCollection.getID()){
+        			found = true;
+        			break;
+        		}
+        	}
+        	if (!found){
+        		collections.add(collection);
+        	}
+        }
+        
+        // Put them in an array
+        Collection[] collectionArray = new Collection[collections.size()];
+        collectionArray = (Collection[]) collections.toArray(collectionArray);
+
+        return collectionArray;
+    }
+    
+    /**
+     * Get the collections that can be removed as childs from this community. That is, from all collections of this
+     * community, remove those that have only one father (so that if they are removed they will become orphan) and
+     * return the others.
+     * 
+     * @return array of Collection objects
+     */
+    public Collection[] getPossibleRemoveCollections() throws SQLException
+    {
+        List<Collection> collections = new ArrayList<Collection>();
+
+        Collection[] childCollections = this.getCollections();
+
+        	for (Collection childCollection : childCollections){
+        		if (childCollection.getParentCommunities().length>1){
+        			collections.add(childCollection);
+        		}
+        	}
+        
+        // Put them in an array
+        Collection[] collectionArray = new Collection[collections.size()];
+        collectionArray = (Collection[]) collections.toArray(collectionArray);
+
+        return collectionArray;
+    }
+    
+    /**
      * Get the immediate sub-communities of this community. Throws an
      * SQLException because creating a community object won't load in all
      * collections.

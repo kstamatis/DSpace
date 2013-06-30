@@ -22,6 +22,7 @@
 <%@ page import="org.dspace.app.webui.servlet.admin.EditCommunitiesServlet" %>
 <%@ page import="org.dspace.content.Bitstream" %>
 <%@ page import="org.dspace.content.Community" %>
+<%@ page import="org.dspace.content.Collection" %>
 <%@ page import="org.dspace.eperson.Group" %>
 <%@ page import="org.dspace.app.webui.util.UIUtil" %>
 <%@ page import="org.dspace.core.Utils" %>
@@ -216,6 +217,50 @@
             </tr>   
     <% } %>
 
+<%-- ===========================================================
+     Manage child collections
+     =========================================================== --%>
+
+<% if (community != null && isAdmin) { %>
+     	<tr>
+     		<td class="submitFormLabel"><fmt:message key="jsp.tools.edit-community.form.label9"/></td>
+     		<td>
+     			<% 
+     				Collection[] possibleRemoveCollections = community.getPossibleRemoveCollections();
+     				if (possibleRemoveCollections.length > 0) {
+     			%>
+     					<select name="remove_collection_id">
+     					<% for (Collection collection : possibleRemoveCollections){ %>
+     						<option value="<%= collection.getID()%>"><%= collection.getName() %></option>
+     					<% } %>
+     					</select>
+     					<input type="submit" name="submit_remove_collection" value="<fmt:message key="jsp.tools.edit-community.form.button.remove-collection"/>" />
+                <% } else { %>
+                	<fmt:message key="jsp.tools.edit-community.form.label11"/>
+                <% } %>
+     		</td>
+     	</tr>
+     	
+		<tr>
+     		<td class="submitFormLabel"><fmt:message key="jsp.tools.edit-community.form.label10"/></td>
+     		<td>
+     			<% 
+     				Collection[] possibleAddCollections = community.getPossibleAddCollections();
+     				if (possibleAddCollections.length > 0) {
+     			%>
+     				<select name="add_collection_id">
+     				<% for (Collection collection : possibleAddCollections){ %>
+     					<option value="<%= collection.getID()%>"><%= collection.getName() %></option>
+     				<% } %>
+     				</select>
+     				<input type="submit" name="submit_add_collection" value="<fmt:message key="jsp.tools.edit-community.form.button.add-collection"/>" />
+     			<% } else { %>
+            		<fmt:message key="jsp.tools.edit-community.form.label12"/>
+                <% } %>
+            </td>
+     	</tr>
+<% } %>
+
         </table>
 
         <p>&nbsp;</p>
@@ -258,4 +303,5 @@
             </table>
         </center>
     </form>
+
 </dspace:layout>
