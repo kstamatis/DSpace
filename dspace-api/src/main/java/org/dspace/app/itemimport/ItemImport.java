@@ -103,7 +103,7 @@ public class ItemImport
     {
         public boolean accept(File dir, String n)
         {
-            return n.startsWith("metadata_");
+            return n.startsWith("metadata_") || n.equals("metadata.xml");
         }
     };
 
@@ -1029,7 +1029,9 @@ public class ItemImport
             SAXException, TransformerException, AuthorizeException
     {
         // Load the dublin core metadata
-        loadDublinCore(c, myitem, path + "dublin_core.xml");
+    	if ((new File(path + "dublin_core.xml")).exists()){
+    		loadDublinCore(c, myitem, path + "dublin_core.xml");
+    	}
 
         // Load any additional metadata schemas
         File folder = new File(path);
@@ -1061,11 +1063,19 @@ public class ItemImport
         {
             schema = schemaAttr.getNodeValue();
         }
-         
+
+        // Depending on filename, specify the element name that must be read from 
+        // the metadata file. Old versions expect "dcvalue" while the new "metadata.xml" schema
+        // that can have metadata on multiple schemas within it expects "metadatavalue"
+        String subElementName = "dcvalue";
+        if (filename.endsWith("metadata.xml")){
+        	subElementName = "metadatavalue";
+        }
+        
         // Get the nodes corresponding to formats
         NodeList dcNodes = XPathAPI.selectNodeList(document,
-                "/dublin_core/dcvalue");
-
+                "/dublin_core/"+subElementName);
+        
         if (!isQuiet)
         {
             System.out.println("\tLoading dublin core from " + filename);
@@ -1087,6 +1097,13 @@ public class ItemImport
         {
             value = "";
         }
+        
+        //if the element itself specifies a schema, overwrite the one from the root element or the DC universal one...
+        String newschema = getAttributeValue(n, "schema");
+        if (!StringUtils.isEmpty(newschema)){
+        	schema = newschema;
+        }
+        
         // //getElementData(n, "element");
         String element = getAttributeValue(n, "element");
         String qualifier = getAttributeValue(n, "qualifier"); //NodeValue();
