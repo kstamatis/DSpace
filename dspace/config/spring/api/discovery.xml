@@ -185,11 +185,19 @@
         <!--Which sidebar facets are to be displayed-->
         <property name="sidebarFacets">
             <list>
+<!--                <ref bean="searchFilterAuthor" />-->
+<!--                <ref bean="searchFilterSubject" />-->
+<!--                <ref bean="searchFilterIssued" />-->
+<!--                <ref bean="searchFilterContentInOriginalBundle"/>-->
+<!--                <ref bean="searchFilterEntityType"/>-->
+                
+                <!-- Config for UOI -->
                 <ref bean="searchFilterAuthor" />
                 <ref bean="searchFilterSubject" />
-                <ref bean="searchFilterIssued" />
-                <ref bean="searchFilterContentInOriginalBundle"/>
-                <ref bean="searchFilterEntityType"/>
+<!--                <ref bean="searchFilterIssued" />-->
+                <ref bean="searchFilterType" />
+                <ref bean="sidebarFacetDatePublished" />
+                
             </list>
         </property>
         <!-- Set TagCloud configuration per discovery configuration -->
@@ -197,19 +205,32 @@
         <!--The search filters which can be used on the discovery search page-->
         <property name="searchFilters">
             <list>
+<!--                <ref bean="searchFilterTitle" />-->
+<!--                <ref bean="searchFilterAuthor" />-->
+<!--                <ref bean="searchFilterSubject" />-->
+<!--                <ref bean="searchFilterIssued" />-->
+<!--                <ref bean="searchFilterContentInOriginalBundle"/>-->
+<!--                <ref bean="searchFilterFileNameInOriginalBundle" />-->
+<!--                <ref bean="searchFilterFileDescriptionInOriginalBundle" />-->
+<!--                <ref bean="searchFilterEntityType"/>-->
+<!--                <ref bean="searchFilterIsAuthorOfPublicationRelation"/>-->
+<!--                <ref bean="searchFilterIsProjectOfPublicationRelation"/>-->
+<!--                <ref bean="searchFilterIsOrgUnitOfPublicationRelation"/>-->
+<!--                <ref bean="searchFilterIsPublicationOfJournalIssueRelation"/>-->
+<!--                <ref bean="searchFilterIsJournalOfPublicationRelation"/>-->
+                
+                <!-- Config for UOI -->
                 <ref bean="searchFilterTitle" />
                 <ref bean="searchFilterAuthor" />
                 <ref bean="searchFilterSubject" />
-                <ref bean="searchFilterIssued" />
-                <ref bean="searchFilterContentInOriginalBundle"/>
+<!--                <ref bean="searchFilterIssued" />-->
+                <ref bean="searchFilterType" />
+                <ref bean="sidebarFacetDatePublished" />
+
+		        <ref bean="searchFilterContentInOriginalBundle"/>
                 <ref bean="searchFilterFileNameInOriginalBundle" />
                 <ref bean="searchFilterFileDescriptionInOriginalBundle" />
-                <ref bean="searchFilterEntityType"/>
-                <ref bean="searchFilterIsAuthorOfPublicationRelation"/>
-                <ref bean="searchFilterIsProjectOfPublicationRelation"/>
-                <ref bean="searchFilterIsOrgUnitOfPublicationRelation"/>
-                <ref bean="searchFilterIsPublicationOfJournalIssueRelation"/>
-                <ref bean="searchFilterIsJournalOfPublicationRelation"/>
+                
             </list>
         </property>
         <!--The sort filters for the discovery search-->
@@ -220,6 +241,7 @@
                         <ref bean="sortScore" />
                         <ref bean="sortTitle" />
                         <ref bean="sortDateIssued" />
+                        <ref bean="sortDatePublished"/>
                         <ref bean="sortDateAccessioned"/>
                     </list>
                 </property>
@@ -2564,7 +2586,7 @@
         <property name="facetLimit" value="5"/>
         <property name="sortOrderSidebar" value="COUNT"/>
         <property name="sortOrderFilterPage" value="COUNT"/>
-        <property name="isOpenByDefault" value="true"/>
+        <property name="isOpenByDefault" value="false"/>
         <property name="pageSize" value="10"/>
         <property name="exposeMinAndMaxValue" value="true"/>
     </bean>
@@ -2642,15 +2664,45 @@
         </property>
     </bean>
 
+<!--    <bean id="searchFilterType" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">-->
+<!--        <property name="indexFieldName" value="itemtype" />-->
+<!--        <property name="metadataFields">-->
+<!--            <list>-->
+<!--                <value>dc.type</value>-->
+<!--            </list>-->
+<!--        </property>-->
+<!--    </bean>-->
+    
+    <!-- for UOI -->
     <bean id="searchFilterType" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
-        <property name="indexFieldName" value="itemtype" />
+        <property name="indexFieldName" value="type"/>
         <property name="metadataFields">
             <list>
-                <value>dc.type</value>
+                <value>heal.type</value>
             </list>
         </property>
+        <property name="facetLimit" value="10"/>
+        <property name="sortOrderSidebar" value="COUNT"/>
+        <property name="sortOrderFilterPage" value="COUNT"/>
+        <property name="type" value="text"/>
     </bean>
 
+	<!-- for UOI -->
+	<bean id="sidebarFacetDatePublished" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
+        <property name="indexFieldName" value="datePublished"/>
+        <property name="metadataFields">
+            <list>
+                <!--<value>dc.date.issued</value>-->
+                <value>heal.publicationDate</value>
+                <value>heal.dateCreated</value>
+            </list>
+        </property>
+        <property name="type" value="date"/>
+        <property name="facetLimit" value="5"/>
+        <property name="sortOrderSidebar" value="VALUE"/>
+        <property name="sortOrderFilterPage" value="VALUE"/>
+    </bean>
+    
     <bean id="searchFilterIdentifier" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacet">
         <property name="indexFieldName" value="itemidentifier" />
         <property name="metadataFields">
@@ -3303,6 +3355,12 @@
         <property name="defaultSortOrder" value="desc"/>
     </bean>
 
+	<bean id="sortDatePublished" class="org.dspace.discovery.configuration.DiscoverySortFieldConfiguration">
+        <property name="metadataField" value="heal.datePublished"/>
+        <property name="type" value="date"/>
+        <property name="defaultSortOrder" value="desc"/>
+    </bean>
+    
     <bean id="sortFamilyName" class="org.dspace.discovery.configuration.DiscoverySortFieldConfiguration">
         <property name="metadataField" value="person.familyName"/>
         <property name="defaultSortOrder" value="asc"/>
