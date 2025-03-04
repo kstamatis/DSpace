@@ -1,0 +1,128 @@
+# EXAMPLE "local.cfg" for DSpace.
+#
+# Any configurations added to this file will automatically OVERRIDE configurations
+# of the same name in any of the DSpace *.cfg files. This includes overriding
+# settings in any of these files:
+#    * [dspace]/config/dspace.cfg
+#    * Any configuration file that is included in 'dspace.cfg'
+#     (See "include = [filepath]" settings near the end of dspace.cfg.
+#      By default, it includes all [dspace]/config/modules/*.cfg files)
+#    * Spring Boot's application.properties
+#      ([dspace-src]/dspace-server-webapp/src/main/resources/application.properties)
+#
+# By default, this EXAMPLE file includes a number of commonly overridden configurations.
+# * ADD configurations by simply copying them into this file from any existing *.cfg file.
+# * REMOVE configurations by simply commenting them out or deleting them below.
+#
+# Any commented out settings in this file are simply ignored. A configuration
+# will only override another configuration if it has the EXACT SAME key/name.
+# For example, including "dspace.dir" in this local.cfg will override the
+# default value of "dspace.dir" in the dspace.cfg file.
+# Similarly, including "oai.solr.url" in this local.cfg will override the
+# default value of "oai.solr.url" in the modules/oai.cfg file.
+#
+
+
+##########################
+# SERVER CONFIGURATION   #
+##########################
+
+# DSpace installation directory.
+# This is the location where you want to install DSpace.
+# Windows note: Please remember to use forward slashes for all paths (e.g. C:/dspace)
+dspace.dir = ********
+
+# Public URL of DSpace backend ('server' webapp). May require a port number if not using standard ports (80 or 443)
+# DO NOT end it with '/'.
+# This is where REST API and all enabled server modules (OAI-PMH, SWORD, SWORDv2, RDF, etc) will respond.
+# NOTE: This URL must be accessible to all DSpace users (should not use 'localhost' in Production)
+# and is usually "synced" with the "rest" section in the DSpace User Interface's config.*.yml.
+# It corresponds to the URL that you would type into your browser to access the REST API.
+dspace.server.url = ********
+
+# Additional URL of DSpace backend which could be used by DSpace frontend during SSR execution.
+# May require a port number if not using standard ports (80 or 443)
+# DO NOT end it with '/'.
+dspace.server.ssr.url = ${dspace.server.url}
+
+# Public URL of DSpace frontend (Angular UI). May require a port number if not using standard ports (80 or 443)
+# DO NOT end it with '/'.
+# This is used by the backend to provide links in emails, RSS feeds, Sitemaps, etc.
+# NOTE: this URL must be accessible to all DSpace users (should not use 'localhost' in Production).
+# It corresponds to the URL that you would type into your browser to access the User Interface.
+dspace.ui.url = ********
+
+# Name of the site
+dspace.name = Olympias Repository
+
+# Solr server/webapp.
+# DSpace uses Solr for all search/browse capability (and for usage statistics).
+# Since DSpace 7, SOLR must be installed as a stand-alone service
+solr.server = ********
+
+##########################
+# DATABASE CONFIGURATION #
+##########################
+# DSpace ONLY supports PostgreSQL at this time.
+
+# URL for connecting to database
+db.url = jdbc:postgresql://********:********/********
+
+# Database username and password
+db.username = ********
+db.password = ********
+
+
+###########################
+##### Email settings ######
+###########################
+
+# SMTP mail server authentication username and password (if required)
+mail.server.username = olympias.uoi@gmail.com
+mail.server.password = ******
+
+# From address for mail
+# All mail from the DSpace site will use this 'from' address
+mail.from.address = olympias.uoi@gmail.com
+
+# When feedback is submitted via the Feedback form, it is sent to this address
+# Currently limited to one recipient!
+# if this property is empty or commented out, feedback form is disabled
+feedback.recipient = k.i.stamastis@gmail.com
+
+# General site administration (Webmaster) e-mail
+# System notifications/reports and other sysadmin emails are sent to this address
+mail.admin = k.i.stamastis@gmail.com
+mail.admin.name = DSpace Administrator
+
+# Helpdesk E-mail
+mail.helpdesk = ${mail.admin}
+mail.helpdesk.name = Help Desk
+
+# Recipient for server errors and alerts (defaults to mail.admin)
+alert.recipient = k.i.stamastis@gmail.com
+
+# Recipient for new user registration emails (defaults to unspecified)
+registration.notify = k.i.stamastis@gmail.com
+
+################################################
+##### DOI registration agency credentials ######
+################################################
+
+# Credentials used to authenticate against the registration agency:
+identifier.doi.user = HEALLINK.UOI
+identifier.doi.password = gDvIS^6n08VU
+
+# DOI prefix used to mint DOIs. All DOIs minted by DSpace will use this prefix.
+# The Prefix will be assigned by the registration agency.
+identifier.doi.prefix = 10.26268
+
+# If you want to, you can further separate your namespace. Should all the
+# suffixes of all DOIs minted by DSpace start with a special string to separate
+# it from other services also minting DOIs under your prefix?
+identifier.doi.namespaceseparator = heal.uoi.
+
+########################
+#  LDN INBOX SETTINGS  #
+########################
+ldn.enabled = true
