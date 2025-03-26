@@ -182,30 +182,30 @@
                     </hint>
                 </field>
             </row>
-            <row>
-                <field>
-                    <dc-schema>heal</dc-schema>
-                    <dc-element>access</dc-element>
-                    <dc-qualifier/>
-                    <repeatable>false</repeatable>
-                    <label>Item access scheme</label>
-                    <input-type value-pairs-name="accessTypeList">dropdown</input-type>
-                    <hint>The access scheme of the item's full text. Possible choices
-                        include:
-                        1) leaving the item accessible to the public,
-                        2) allowing access to users that use an IP address within the
-                        institutional IP range,
-                        3) allowing access only to logged-in DSpace
-                        users, and
-                        4) setting a 6 months embargo period, during which the
-                        full text of the item is not available.
-                        When the embargo period
-                        ends, the public access scheme is assigned to the item.
-                    </hint>
-                    <required>You must select an access scheme for the item you wish to
-                        submit.</required>
-                </field>
-            </row>
+<!--            <row>-->
+<!--                <field>-->
+<!--                    <dc-schema>heal</dc-schema>-->
+<!--                    <dc-element>access</dc-element>-->
+<!--                    <dc-qualifier/>-->
+<!--                    <repeatable>false</repeatable>-->
+<!--                    <label>Item access scheme</label>-->
+<!--                    <input-type value-pairs-name="accessTypeList">dropdown</input-type>-->
+<!--                    <hint>The access scheme of the item's full text. Possible choices-->
+<!--                        include:-->
+<!--                        1) leaving the item accessible to the public,-->
+<!--                        2) allowing access to users that use an IP address within the-->
+<!--                        institutional IP range,-->
+<!--                        3) allowing access only to logged-in DSpace-->
+<!--                        users, and-->
+<!--                        4) setting a 6 months embargo period, during which the-->
+<!--                        full text of the item is not available.-->
+<!--                        When the embargo period-->
+<!--                        ends, the public access scheme is assigned to the item.-->
+<!--                    </hint>-->
+<!--                    <required>You must select an access scheme for the item you wish to-->
+<!--                        submit.</required>-->
+<!--                </field>-->
+<!--            </row>-->
             <row>
                 <field>
                     <dc-schema>heal</dc-schema>
@@ -483,13 +483,10 @@
                     <label>Bibliographic citation</label>
                     <type-bind>journalArticle</type-bind>
                     <input-type>onebox</input-type>
-                    <hint>The recommended citation format for the article. Usually,
-                        citations are provided in the form: &quot;Author Name&quot;, &quot;Article
-                        title&quot;,
-                        &quot;Journal name&quot;,&quot;Volume (Issue)&quot;, &quot;Page range&quot;,
-                        &quot;Publisher&quot;,&quot;Year&quot;.</hint>
+                    <hint>The recommended citation format for the article. Usually, citations are provided in the form: "Author Name", "Article title", &quot;Journal name&quot;,&quot;Volume (Issue)&quot;, &quot;Page range&quot;, &quot;Publisher&quot;,&quot;Year&quot;.</hint>
                     <required>You must fill in the bibliographic citation field.</required>
                 </field>
+                
             </row>
             <row>
                 <field>
@@ -1363,30 +1360,30 @@
                     </hint>
                 </field>
             </row>
-            <row>
-                <field>
-                    <dc-schema>heal</dc-schema>
-                    <dc-element>access</dc-element>
-                    <dc-qualifier/>
-                    <repeatable>false</repeatable>
-                    <label>Item access scheme</label>
-                    <input-type value-pairs-name="accessTypeList">dropdown</input-type>
-                    <hint>The access scheme of the item's full text. Possible choices
-                        include:
-                        1) leaving the item accessible to the public,
-                        2) allowing access to users that use an IP address within the
-                        institutional IP range,
-                        3) allowing access only to logged-in DSpace
-                        users, and
-                        4) setting a 6 months embargo period, during which the
-                        full text of the item is not available.
-                        When the embargo period
-                        ends, the public access scheme is assigned to the item.
-                    </hint>
-                    <required>You must select an access scheme for the item you wish to
-                        submit.</required>
-                </field>
-            </row>
+<!--             <row> -->
+<!--                 <field> -->
+<!--                     <dc-schema>heal</dc-schema> -->
+<!--                     <dc-element>access</dc-element> -->
+<!--                     <dc-qualifier/> -->
+<!--                     <repeatable>false</repeatable> -->
+<!--                     <label>Item access scheme</label> -->
+<!--                     <input-type value-pairs-name="accessTypeList">dropdown</input-type> -->
+<!--                     <hint>The access scheme of the item's full text. Possible choices -->
+<!--                         include: -->
+<!--                         1) leaving the item accessible to the public, -->
+<!--                         2) allowing access to users that use an IP address within the -->
+<!--                         institutional IP range, -->
+<!--                         3) allowing access only to logged-in DSpace -->
+<!--                         users, and -->
+<!--                         4) setting a 6 months embargo period, during which the -->
+<!--                         full text of the item is not available. -->
+<!--                         When the embargo period -->
+<!--                         ends, the public access scheme is assigned to the item. -->
+<!--                     </hint> -->
+<!--                     <required>You must select an access scheme for the item you wish to -->
+<!--                         submit.</required> -->
+<!--                 </field> -->
+<!--             </row> -->
             <row>
                 <field>
                     <dc-schema>heal</dc-schema>

@@ -10,46 +10,71 @@
         <property name="options">
             <list>
                 <ref bean="openAccess"/>
-                <ref bean="lease"/>
-                <ref bean="embargoed" />
-                <ref bean="administrator"/>
+<!--                <ref bean="lease"/>-->
+<!--                <ref bean="embargoed" />-->
+<!--                <ref bean="administrator"/>-->
                 <!-- <ref bean="networkAdministration"/> -->
+                <ref bean="ipbased"/>
+				<ref bean="loggedin"/>
+				<ref bean="embargoed"/>
             </list>
         </property>
     </bean>
 
     <bean id="openAccess" class="org.dspace.submit.model.AccessConditionOption">
         <property name="groupName" value="Anonymous"/>
-        <property name="name" value="openaccess"/>
+        <property name="name" value="Publicly accessible"/>
         <property name="hasStartDate" value="false"/>
         <property name="hasEndDate" value="false"/>
     </bean>
-    <bean id="lease" class="org.dspace.submit.model.AccessConditionOption">
-        <property name="groupName" value="Anonymous"/>
-        <property name="name" value="lease"/>
-        <property name="hasStartDate" value="false"/>
-        <property name="hasEndDate" value="true"/>
-        <property name="endDateLimit" value="+6MONTHS"/>
-    </bean>
-    <bean id="embargoed" class="org.dspace.submit.model.AccessConditionOption">
-        <property name="groupName" value="Anonymous"/>
-        <property name="name" value="embargo"/>
-        <property name="hasStartDate" value="true"/>
-        <property name="startDateLimit" value="+36MONTHS"/>
-        <property name="hasEndDate" value="false"/>
-    </bean>
-    <bean id="administrator" class="org.dspace.submit.model.AccessConditionOption">
-        <property name="groupName" value="Administrator"/>
-        <property name="name" value="administrator"/>
-        <property name="hasStartDate" value="false"/>
-        <property name="hasEndDate" value="false"/>
-    </bean>
+<!--    <bean id="lease" class="org.dspace.submit.model.AccessConditionOption">-->
+<!--        <property name="groupName" value="Anonymous"/>-->
+<!--        <property name="name" value="lease"/>-->
+<!--        <property name="hasStartDate" value="false"/>-->
+<!--        <property name="hasEndDate" value="true"/>-->
+<!--        <property name="endDateLimit" value="+6MONTHS"/>-->
+<!--    </bean>-->
+<!--    <bean id="embargoed" class="org.dspace.submit.model.AccessConditionOption">-->
+<!--        <property name="groupName" value="Anonymous"/>-->
+<!--        <property name="name" value="embargo"/>-->
+<!--        <property name="hasStartDate" value="true"/>-->
+<!--        <property name="startDateLimit" value="+36MONTHS"/>-->
+<!--        <property name="hasEndDate" value="false"/>-->
+<!--    </bean>-->
+<!--    <bean id="administrator" class="org.dspace.submit.model.AccessConditionOption">-->
+<!--        <property name="groupName" value="Administrator"/>-->
+<!--        <property name="name" value="administrator"/>-->
+<!--        <property name="hasStartDate" value="false"/>-->
+<!--        <property name="hasEndDate" value="false"/>-->
+<!--    </bean>-->
 <!--     <bean id="networkAdministration" class="org.dspace.submit.model.AccessConditionOption">
     	<property name="groupName" value="INSTITUTIONAL_NETWORK"/>
         <property name="name" value="networkAdministration"/>
         <property name="hasStartDate" value="false"/>
         <property name="hasEndDate" value="false"/>
     </bean> -->
+    
+    
+    <bean id="ipbased" class="org.dspace.submit.model.AccessConditionOption">
+        <property name="groupName" value="MYUNIVERSITY"/>
+        <property name="name" value="Institutional IP-based access"/>
+        <property name="hasStartDate" value="false"/>
+        <property name="hasEndDate" value="false"/>
+    </bean>
+    <bean id="loggedin" class="org.dspace.submit.model.AccessConditionOption">
+        <property name="groupName" value="AUTHENTICATED"/>
+        <property name="name" value="Accessible to logged-in DSpace users"/>
+        <property name="hasStartDate" value="false"/>
+        <property name="hasEndDate" value="false"/>
+    </bean>
+    <bean id="embargoed" class="org.dspace.submit.model.AccessConditionOption">
+        <property name="groupName" value="Anonymous"/>
+        <property name="name" value="Embargo (up to 3 years)"/>
+        <property name="hasStartDate" value="true"/>
+        <property name="startDateLimit" value="+36MONTHS"/>
+        <property name="hasEndDate" value="false"/>
+    </bean>
+    
 
     <bean id="uploadConfigurationService" class="org.dspace.submit.model.UploadConfigurationService">
         <property name="map">
@@ -68,9 +93,12 @@
         <property name="options">
             <list>
                 <ref bean="openAccess"/>
-                <ref bean="lease"/>
-                <ref bean="embargoed" />
-                <ref bean="administrator"/>
+<!--                 <ref bean="lease"/> -->
+<!--                 <ref bean="embargoed" /> -->
+<!--                 <ref bean="administrator"/> -->
+				<ref bean="ipbased"/>
+				<ref bean="loggedin"/>
+				<ref bean="embargoed"/>
             </list>
         </property>
     </bean>
@@ -81,17 +109,23 @@
         <property name="itemAccessConditionOptions">
             <list>
                 <ref bean="openAccess"/>
-                <ref bean="administrator"/>
-                <ref bean="embargoed" />
-                <ref bean="lease"/>
+<!--                 <ref bean="lease"/> -->
+<!--                 <ref bean="embargoed" /> -->
+<!--                 <ref bean="administrator"/> -->
+				<ref bean="ipbased"/>
+				<ref bean="loggedin"/>
+				<ref bean="embargoed"/>
             </list>
         </property>
         <property name="bitstreamAccessConditionOptions">
             <list>
                 <ref bean="openAccess"/>
-                <ref bean="administrator"/>
-                <ref bean="embargoed" />
-                <ref bean="lease"/>
+<!--                 <ref bean="lease"/> -->
+<!--                 <ref bean="embargoed" /> -->
+<!--                 <ref bean="administrator"/> -->
+				<ref bean="ipbased"/>
+				<ref bean="loggedin"/>
+				<ref bean="embargoed"/>
             </list>
         </property>
     </bean>

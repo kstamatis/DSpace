@@ -10,16 +10,17 @@
 ##
 ## See org.dspace.core.Email for information on the format of this file.
 ##
-#set($subject = "${config.get('dspace.name')}: Feedback Form Information")
+#set($subject = "${config.get('dspace.name')}: Πληροφορίες Φόρμας Σχολίων")
 
-Comments:
+Σχόλια:
 
 ${params[6]}
 
 
-Date: ${params[0]}
+Ήμερομηνία: ${params[0]}
 Email: ${params[1]}
-Logged In As: ${params[2]}
-Referring Page: ${params[3]}
+Σύνδεση ως: ${params[2]}
+Σελίδα Αναφοράς: ${params[3]}
 User Agent: ${params[4]}
 Session: ${params[5]}
+
